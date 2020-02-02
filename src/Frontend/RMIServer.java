@@ -11,8 +11,7 @@ public class RMIServer {
         Registry r;
         try {
             LocateRegistry.createRegistry(2023);
-        } catch (
-                RemoteException var4) {
+        } catch (RemoteException var4) {
             var4.printStackTrace();
         }
         r = LocateRegistry.getRegistry(2023);

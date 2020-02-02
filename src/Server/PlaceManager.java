@@ -31,7 +31,7 @@ public class PlaceManager extends UnicastRemoteObject implements PlaceManagerInt
     }
 
     public boolean delPlace(int index) {
-        array.remove(index);
+        array.remove(index-1);
         return true;
     }
 

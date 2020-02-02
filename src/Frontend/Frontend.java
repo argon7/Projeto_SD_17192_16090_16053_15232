@@ -105,8 +105,9 @@ public class Frontend extends UnicastRemoteObject implements FrontendInterface {
     public HashMap<String,String> allPlaces() throws RemoteException, MalformedURLException, NotBoundException {
 
         System.out.println("Return all places");
-
-        PlaceManagerInterface stub2= (PlaceManagerInterface) Naming.lookup("rmi://localhost:"+frontEndView.fetchRandomNode()+"/placeList");
+        String calledReadOperationOnWhatNode = String.valueOf(frontEndView.fetchRandomNode());
+        PlaceManagerInterface stub2= (PlaceManagerInterface) Naming.lookup("rmi://localhost:"+calledReadOperationOnWhatNode+"/placeList");
+        System.out.println("NODE THAT RESPONDED TO READ REQUEST = "+calledReadOperationOnWhatNode);
         ArrayList<Place> arr = stub2.allPlaces();
         HashMap<String,String>ax = new HashMap<>();
         for (Place obj : arr) {

@@ -23,7 +23,6 @@ public class Client {
                 menu(stub);
             } catch (Exception e) {
                 System.err.println("Frontend not available, retrying in 5 seconds ");
-                e.printStackTrace();
             }
             Thread.sleep(5000);
         }
@@ -107,7 +106,7 @@ public class Client {
         }
 
         String key = "";
-        String value = "";
+        String value;
         String localidade = "99999";
 
         int i = 0;
@@ -159,38 +158,34 @@ public class Client {
 
     //Delete place
     public static void deletePlace(FrontendInterface stub) throws RemoteException, MalformedURLException, NotBoundException {
-        HashMap<String, String> ax;
-        ax = stub.allPlaces();
+        HashMap<String, String> ax = stub.allPlaces();
         if (ax.isEmpty()) {
             System.out.println("No places to delete");
             return;
         }
-        String key = "";
-        String value = "";
-        String localidade = "99999";
+
         int i = 0;
         System.out.println("+----------------------------------+");
         System.out.println("|             Places               |");
         System.out.println("+----------------------------------+");
         for (HashMap.Entry<String, String> val : ax.entrySet()) {
-            i++;
-            System.out.println("|  " + i + " -> Local: " + val.getKey() + " C.Postal: " + val.getValue());
+            System.out.println("|  " + ++i + " -> Local: " + val.getKey() + " C.Postal: " + val.getValue());
         }
         System.out.println("+----------------------------------+");
         System.out.println("|       0 -> Cancel Operation      |");
         System.out.println("+----------------------------------+");
         Scanner myObj = new Scanner(System.in);
+        String teste = String.valueOf(ax.size()+1);
 
-        while (Integer.parseInt(localidade) > i) {
+
+        while ((Integer.parseInt(teste)>ax.size()) || (Integer.parseInt(teste)<1)){
             System.out.println("What place do you wish to delete?");
             System.out.print("-> ");
-            localidade = myObj.nextLine();
-            if (Integer.parseInt(localidade) == 0) {
-                System.out.println("Delete operation canceled");
-                return;
-            }
+            teste = myObj.nextLine();
+            if(Integer.parseInt(teste)==0) return;
         }
-        boolean answer = stub.delPlace(Integer.parseInt(localidade));
+
+        boolean answer = stub.delPlace(Integer.parseInt(teste));
         if (answer) {
             System.out.println("Place apagado com sucesso");
         } else {
