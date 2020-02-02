@@ -2,6 +2,7 @@ package Cliente;
 import Shared.FrontendInterface;
 
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -23,12 +24,13 @@ public class Client {
                 menu(stub);
             } catch (Exception e) {
                 System.err.println("Frontend not available, retrying in 5 seconds ");
+                e.printStackTrace();
             }
             Thread.sleep(5000);
         }
     }
 
-    public static void menu(FrontendInterface stub) throws RemoteException, MalformedURLException, NotBoundException {
+    public static void menu(FrontendInterface stub) throws IOException, NotBoundException {
         Scanner myObj = new Scanner(System.in);
         String escolha;
         while (true) {
@@ -123,7 +125,7 @@ public class Client {
 
         Scanner myObj = new Scanner(System.in);
 
-        while (Integer.parseInt(localidade) > i) {
+        while (Integer.parseInt(localidade) > i || Integer.parseInt(localidade) < 0 ) {
             System.out.println("What place do you wish to update?");
             System.out.print("-> ");
             localidade = myObj.nextLine();
@@ -157,7 +159,7 @@ public class Client {
     }
 
     //Delete place
-    public static void deletePlace(FrontendInterface stub) throws RemoteException, MalformedURLException, NotBoundException {
+    public static void deletePlace(FrontendInterface stub) throws IOException, NotBoundException {
         HashMap<String, String> ax = stub.allPlaces();
         if (ax.isEmpty()) {
             System.out.println("No places to delete");

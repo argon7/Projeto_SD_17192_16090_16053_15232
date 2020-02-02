@@ -12,7 +12,7 @@ import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class FrontEndView {
-    private Timestamp waitTimeForRemovalFromView = new Timestamp(10000);
+    private Timestamp waitTimeForRemovalFromView = new Timestamp(5000);
     private ConcurrentHashMap<String, Timestamp> FrontEndView = new ConcurrentHashMap<>();
 
     public void adicionarNaFrontEndView(String porto, Timestamp momentoEmQueComunicou) {
@@ -24,7 +24,8 @@ public class FrontEndView {
             String key = mapElement.getKey();
             Timestamp Value = mapElement.getValue();
             Timestamp Testingtimestamp = new Timestamp(System.currentTimeMillis());
-            if (Value.getTime()-Testingtimestamp.getTime()>waitTimeForRemovalFromView.getTime()){
+            System.out.println(Testingtimestamp.getTime()-Value.getTime()>waitTimeForRemovalFromView.getTime());
+            if ((Testingtimestamp.getTime()-Value.getTime())>waitTimeForRemovalFromView.getTime()){
                 FrontEndView.remove(key);
             }
         }

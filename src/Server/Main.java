@@ -1,5 +1,6 @@
 package Server;
 import Shared.No;
+import Shared.Place;
 import Shared.PlaceManagerInterface;
 
 import java.io.IOException;
@@ -43,7 +44,7 @@ public class Main {
             while (true) {
                 try {
                     String recebe = No.listenMulticastMessage("230.1.1.1", 5000);
-                    String[] aux = recebe.split("@", 4);
+                    String[] aux = recebe.split("@", 5);
                     String recebe_porto = aux[0];
                     String recebe_estado = aux[1];
                     String recebe_informacao = aux[2];
@@ -54,6 +55,21 @@ public class Main {
                         // no.PrintVistaDoNo();
                         // time.PrintVizinhos();
                     }
+
+                    if (recebe_informacao.equals("ADD") && no.getState()!=2) {
+                        String recebe_localidade = aux[3];
+                        String recebe_postal = aux[4];
+                        placeList.slavesADD(new Place(recebe_postal,recebe_localidade));
+
+                    }
+
+                    if (recebe_informacao.equals("DEL") && no.getState()!=2) {
+                        String recebe_delete_index = aux[3];
+                        System.out.print("========================================================= DEL ");
+                        System.out.println(recebe_delete_index);
+                        placeList.slavesDEL(Integer.parseInt(recebe_delete_index));
+                    }
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

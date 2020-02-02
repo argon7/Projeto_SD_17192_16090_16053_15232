@@ -92,13 +92,13 @@ public class Frontend extends UnicastRemoteObject implements FrontendInterface {
         try{
             stub.addPlace(p);
             return true;
-        }catch (NullPointerException a) {
+        }catch (NullPointerException | IOException a) {
             System.out.println("Stub nao definido: "+stub);
             return false;
         }
     }
 
-    public boolean delPlace(int index) throws RemoteException {
+    public boolean delPlace(int index) throws IOException {
         System.out.println("DelPlace");
         return stub.delPlace(index);
     }
