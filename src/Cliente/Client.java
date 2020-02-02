@@ -1,6 +1,6 @@
 package Cliente;
-import Shared.FrontendInterface;
 
+import Shared.FrontendInterface;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -8,23 +8,17 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Client {
-    private Client() {
-    }
-
-    public static void main(String[] args) throws  InterruptedException {
-
+    public static void main(String[] args) throws InterruptedException {
         FrontendInterface stub = null;
         while (stub == null) {
             try {
                 stub = (FrontendInterface) Naming.lookup("rmi://localhost:2023/FrontendInterface");
                 menu(stub);
             } catch (Exception e) {
-                System.err.println("Frontend not available, retrying in 5 seconds ");
-                e.printStackTrace();
+                System.out.println("Frontend not available, retrying in 5 seconds ");
             }
             Thread.sleep(5000);
         }
@@ -44,7 +38,7 @@ public class Client {
             System.out.println("|    0 :       Leave               |");
             System.out.println("+----------------------------------+");
             System.out.print("-> ");
-            escolha = myObj.nextLine();  // Read user input
+            escolha = myObj.nextLine();
             switch (escolha) {
                 case "1":
                     System.out.println(" ::: Create Places ::: ");
@@ -72,8 +66,8 @@ public class Client {
         }
     }
 
-    //Adds new place
-    public static void addPlace(FrontendInterface stub) throws RemoteException, MalformedURLException, NotBoundException {
+    public static void addPlace(FrontendInterface stub) throws RemoteException, MalformedURLException,
+            NotBoundException {
         Scanner myObj = new Scanner(System.in);
         System.out.println("Codigo Postal:");
         System.out.print("-> ");
@@ -81,12 +75,11 @@ public class Client {
         System.out.println("localidade:");
         System.out.print("-> ");
         String localidade = myObj.nextLine();
-
         stub.addPlace(codigoPostal, localidade);
     }
 
-    //Return places array
-    public static void readPlaces(FrontendInterface stub) throws RemoteException, MalformedURLException, NotBoundException {
+    public static void readPlaces(FrontendInterface stub) throws RemoteException, MalformedURLException,
+            NotBoundException {
         HashMap<String, String> ax = stub.allPlaces();
         int i = 0;
         System.out.println("+----------------------------------+");
@@ -98,19 +91,18 @@ public class Client {
         }
     }
 
-    //Update place -- Not implemented
-    public static void updatePlace(FrontendInterface stub) throws RemoteException, MalformedURLException, NotBoundException {
+
+    public static void updatePlace(FrontendInterface stub) throws RemoteException, MalformedURLException,
+            NotBoundException {
         HashMap<String, String> ax;
         ax = stub.allPlaces();
         if (ax.isEmpty()) {
             System.out.println("No places to update");
             return;
         }
-
         String key = "";
         String value;
         String localidade = "99999";
-
         int i = 0;
         System.out.println("+----------------------------------+");
         System.out.println("|             Places               |");
@@ -122,11 +114,8 @@ public class Client {
         System.out.println("+----------------------------------+");
         System.out.println("|       0 -> Cancel Operation      |");
         System.out.println("+----------------------------------+");
-
         Scanner myObj = new Scanner(System.in);
-
-
-        while ((Integer.parseInt(localidade) > i || Integer.parseInt(localidade) < 0 )) {
+        while ((Integer.parseInt(localidade) > i || Integer.parseInt(localidade) < 0)) {
             System.out.println("What place do you wish to update?");
             System.out.print("-> ");
             localidade = myObj.nextLine();
@@ -135,7 +124,6 @@ public class Client {
                 return;
             }
         }
-
         i = 0;
         for (HashMap.Entry<String, String> val : ax.entrySet()) {
             i++;
@@ -146,7 +134,6 @@ public class Client {
         }
         System.out.println("Novo código postal:");
         System.out.print("->");
-
         value = myObj.nextLine();
         boolean answer = stub.addPlace(value, key);
         if (answer) {
@@ -154,19 +141,15 @@ public class Client {
         } else {
             System.out.println("Erro ao dar update place selecionado");
         }
-
-
         stub.updatePlace("teste", "teste");
     }
 
-    //Delete place
     public static void deletePlace(FrontendInterface stub) throws IOException, NotBoundException {
         HashMap<String, String> ax = stub.allPlaces();
         if (ax.isEmpty()) {
             System.out.println("No places to delete");
             return;
         }
-
         int i = 0;
         System.out.println("+----------------------------------+");
         System.out.println("|             Places               |");
@@ -178,16 +161,13 @@ public class Client {
         System.out.println("|       0 -> Cancel Operation      |");
         System.out.println("+----------------------------------+");
         Scanner myObj = new Scanner(System.in);
-        String teste = String.valueOf(ax.size()+1);
-
-
-        while ((Integer.parseInt(teste)>ax.size()) || (Integer.parseInt(teste)<1)){
+        String teste = String.valueOf(ax.size() + 1);
+        while ((Integer.parseInt(teste) > ax.size()) || (Integer.parseInt(teste) < 1)) {
             System.out.println("What place do you wish to delete?");
             System.out.print("-> ");
             teste = myObj.nextLine();
-            if(Integer.parseInt(teste)==0) return;
+            if (Integer.parseInt(teste) == 0) return;
         }
-
         boolean answer = stub.delPlace(Integer.parseInt(teste));
         if (answer) {
             System.out.println("Place apagado com sucesso");

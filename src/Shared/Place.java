@@ -16,13 +16,8 @@ public class Place implements Serializable {
     public String getPostalCode() {
         return postalCode;
     }
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
+
     public String getLocality() {
         return locality;
-    }
-    public void setLocality(String locality) {
-        this.locality = locality;
     }
 }

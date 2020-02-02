@@ -15,11 +15,8 @@ public class RMIServer {
             var4.printStackTrace();
         }
         r = LocateRegistry.getRegistry(2023);
-
         FrontendInterface fe = new Frontend();
-        // fe = (FrontendInterface) UnicastRemoteObject.exportObject(fe, 2023);
         r.rebind("FrontendInterface", fe);
         System.out.println("Server FrontendInterface ready");
     }
-
 }

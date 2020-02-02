@@ -1,12 +1,6 @@
 package Frontend;
 
-import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.MulticastSocket;
 import java.sql.Timestamp;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
@@ -19,26 +13,24 @@ public class FrontEndView {
         FrontEndView.put(porto, momentoEmQueComunicou);
     }
 
-    public void ifNoResponseFromNodeForTooLongRemoveFromView(){
+    public void ifNoResponseFromNodeForTooLongRemoveFromView() {
         for (Map.Entry<String, Timestamp> mapElement : FrontEndView.entrySet()) {
             String key = mapElement.getKey();
             Timestamp Value = mapElement.getValue();
             Timestamp Testingtimestamp = new Timestamp(System.currentTimeMillis());
-            System.out.println(Testingtimestamp.getTime()-Value.getTime()>waitTimeForRemovalFromView.getTime());
-            if ((Testingtimestamp.getTime()-Value.getTime())>waitTimeForRemovalFromView.getTime()){
+            if ((Testingtimestamp.getTime() - Value.getTime()) > waitTimeForRemovalFromView.getTime()) {
                 FrontEndView.remove(key);
             }
         }
     }
 
-    public int fetchRandomNode(){
+    public int fetchRandomNode() {
         Random rand = new Random();
         int valofnode = rand.nextInt((FrontEndView.size() - 1) + 1) + 1;
-
         int check = 1;
         for (Map.Entry<String, Timestamp> mapElement : FrontEndView.entrySet()) {
             String key = mapElement.getKey();
-            if (check==valofnode){
+            if (check == valofnode) {
                 return Integer.parseInt(key);
             }
             check++;
@@ -46,6 +38,4 @@ public class FrontEndView {
         System.out.print("ERROR IN fetchRandomNode");
         return 0;
     }
-
-
 }

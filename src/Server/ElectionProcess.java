@@ -14,7 +14,6 @@ public class ElectionProcess {
     private Timestamp waitTimeForOK = new Timestamp(30000);
     private Timestamp waitTimeForVictory = new Timestamp(60000);
 
-
     public boolean isFailure() {
         return failure;
     }
@@ -23,9 +22,7 @@ public class ElectionProcess {
         this.failure = failure;
     }
 
-    public boolean isWaitingForOK() {
-        return waitingForOK;
-    }
+    public boolean isWaitingForOK() { return !waitingForOK; }
 
     public void setWaitingForOK(boolean waitingForOK) {
         this.waitingForOK = waitingForOK;
@@ -55,7 +52,6 @@ public class ElectionProcess {
         this.passedVictoryPhase = passedVictoryPhase;
     }
 
-
     public void startOkwaitTime() {
         Timestamp Testingtimestamp = new Timestamp(System.currentTimeMillis());
         electoralProcessStates.put("waitingForOK", Testingtimestamp);
@@ -71,10 +67,8 @@ public class ElectionProcess {
             String key = mapElement.getKey();
             Timestamp Value = mapElement.getValue();
             Timestamp Testingtimestamp = new Timestamp(System.currentTimeMillis());
-            // newTimestamp.setTime(System.currentTimeMillis());
             if (key.equals("waitingForOK"))
-                // System.out.println(String.valueOf(newTimestamp.getTime() - Value.getTime() > waitTimeForOK.getTime()));
-                return (Testingtimestamp.getTime() - Value.getTime() > waitTimeForOK.getTime()); // bool value
+                return (Testingtimestamp.getTime() - Value.getTime() > waitTimeForOK.getTime());
         }
         return false;
     }
@@ -84,19 +78,17 @@ public class ElectionProcess {
             String key = mapElement.getKey();
             Timestamp Value = mapElement.getValue();
             Timestamp TestingVictorytimestamp = new Timestamp(System.currentTimeMillis());
-            // newTimestamp.setTime(System.currentTimeMillis());
             if (key.equals("waitingForVictory"))
-                return TestingVictorytimestamp.getTime() - Value.getTime() > waitTimeForVictory.getTime(); // bool value
+                return TestingVictorytimestamp.getTime() - Value.getTime() > waitTimeForVictory.getTime();
         }
         return false;
     }
 
-    public void cleanUpFromElectionParty(){
+    public void cleanUpFromElectionParty() {
         failure = false;
         waitingForOK = true;
         waitingForVictory = true;
         passedOKPhase = false;
         passedVictoryPhase = false;
     }
-
 }
