@@ -14,7 +14,7 @@ public interface FrontendInterface extends Remote, Serializable {
 
     HashMap<String, String> allPlaces() throws RemoteException, NotBoundException, MalformedURLException;
 
-    void updatePlace(String codigoPostal, String localidate) throws RemoteException;
+    void updatePlace() throws RemoteException;
 
     boolean delPlace(int index) throws IOException;
 }

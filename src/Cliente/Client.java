@@ -141,7 +141,7 @@ public class Client {
         } else {
             System.out.println("Erro ao dar update place selecionado");
         }
-        stub.updatePlace("teste", "teste");
+        stub.updatePlace();
     }
 
     public static void deletePlace(FrontendInterface stub) throws IOException, NotBoundException {

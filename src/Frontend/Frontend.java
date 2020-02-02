@@ -21,7 +21,7 @@ import static java.lang.Thread.sleep;
 
 public class Frontend extends UnicastRemoteObject implements FrontendInterface {
     private static PlaceManagerInterface stub;
-    FrontEndView frontEndView = new FrontEndView();
+    final FrontEndView frontEndView = new FrontEndView();
 
     public Frontend() throws RemoteException {
         new Thread(() -> {
@@ -85,7 +85,7 @@ public class Frontend extends UnicastRemoteObject implements FrontendInterface {
             stub.addPlace(p);
             return true;
         } catch (NullPointerException | IOException a) {
-            System.out.println("Stub nao definido: " + stub);
+            System.out.println("Stub not defined");
             return false;
         }
     }
@@ -109,7 +109,7 @@ public class Frontend extends UnicastRemoteObject implements FrontendInterface {
         return ax;
     }
 
-    public void updatePlace(String codigoPostal, String localidate) {
+    public void updatePlace() {
         System.out.println("Update Place");
     }
 

@@ -5,9 +5,9 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Time {
-    private ConcurrentHashMap<String, Timestamp> Vizinhos = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<String, Timestamp> Vizinhos = new ConcurrentHashMap<>();
     private Timestamp newtimestamp = new Timestamp(System.currentTimeMillis());
-    private Timestamp Threshold = new Timestamp(20000);
+    private final Timestamp Threshold = new Timestamp(20000);
 
     public void AdicionarVizinho(String porto) {
         newtimestamp = new Timestamp(System.currentTimeMillis());

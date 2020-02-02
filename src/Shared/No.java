@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class No {
-    private ConcurrentHashMap<String, String> Vista = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<String, String> Vista = new ConcurrentHashMap<>();
     private int State = 0;
     private int Porto = 0;
     private int viewprint = 0;
@@ -57,7 +57,6 @@ public class No {
     public boolean isThereAFailure(ConcurrentHashMap<String, String> Test) {
         int LeaderCount = 0;
         for (Map.Entry<String, String> mapElement : Test.entrySet()) {
-            String key = mapElement.getKey();
             String Value = mapElement.getValue();
             if (Value.equals("2")) {
                 LeaderCount++;

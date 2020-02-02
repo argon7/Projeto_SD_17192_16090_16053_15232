@@ -6,8 +6,8 @@ import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class FrontEndView {
-    private Timestamp waitTimeForRemovalFromView = new Timestamp(5000);
-    private ConcurrentHashMap<String, Timestamp> FrontEndView = new ConcurrentHashMap<>();
+    private final Timestamp waitTimeForRemovalFromView = new Timestamp(5000);
+    private final ConcurrentHashMap<String, Timestamp> FrontEndView = new ConcurrentHashMap<>();
 
     public void adicionarNaFrontEndView(String porto, Timestamp momentoEmQueComunicou) {
         FrontEndView.put(porto, momentoEmQueComunicou);

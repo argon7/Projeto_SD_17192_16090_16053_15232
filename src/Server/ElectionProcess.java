@@ -10,9 +10,9 @@ public class ElectionProcess {
     private boolean waitingForVictory = true;
     private boolean passedOKPhase = false;
     private boolean passedVictoryPhase = false;
-    private ConcurrentHashMap<String, Timestamp> electoralProcessStates = new ConcurrentHashMap<>();
-    private Timestamp waitTimeForOK = new Timestamp(30000);
-    private Timestamp waitTimeForVictory = new Timestamp(60000);
+    private final ConcurrentHashMap<String, Timestamp> electoralProcessStates = new ConcurrentHashMap<>();
+    private final Timestamp waitTimeForOK = new Timestamp(30000);
+    private final Timestamp waitTimeForVictory = new Timestamp(60000);
 
     public boolean isFailure() {
         return failure;

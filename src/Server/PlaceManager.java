@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class PlaceManager extends UnicastRemoteObject implements PlaceManagerInterface {
     private static final long serialVersionUID = 1L;
-    private static ArrayList<Place> array = new ArrayList<>();
+    private static final ArrayList<Place> array = new ArrayList<>();
 
     public PlaceManager() throws RemoteException {
         super();
