@@ -125,7 +125,8 @@ public class Client {
 
         Scanner myObj = new Scanner(System.in);
 
-        while (Integer.parseInt(localidade) > i || Integer.parseInt(localidade) < 0 ) {
+
+        while ((Integer.parseInt(localidade) > i || Integer.parseInt(localidade) < 0 )) {
             System.out.println("What place do you wish to update?");
             System.out.print("-> ");
             localidade = myObj.nextLine();
