@@ -1,3 +1,4 @@
+# ARQUIVADO
 # Sistemas Distribuidos
 Projecto desenvolvido no âmbito da Cadeira SD 2019/2020.
 
